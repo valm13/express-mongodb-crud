@@ -1,0 +1,34 @@
+name: Build and Deploy Docker image
+
+on:
+  push:
+    branches:
+    - master
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+
+  build:
+ 
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install NPM dependencies
+      run: |
+        npm install --production --unsafe-perm
+    - uses: sburris/dependency-check-action@master
+      name: Analyze 3rd party dependencies
+      with:
+       Project-Name: CrudApp
+    - name: Archive dependency check reports
+      uses: actions/upload-artifact@v1
+      with:
+        name: reports
+        path: reports
+    - name: check current directory
+      run: |
+        pwd
+        ls -ltra
