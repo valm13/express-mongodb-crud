@@ -23,6 +23,11 @@ jobs:
       name: Analyze 3rd party dependencies
       with:
        Project-Name: CrudApp
+    - name: Archive dependency check reports
+      uses: actions/upload-artifact@v1
+      with:
+        name: reports
+        path: reports
     - name: check current directory
       run: |
         pwd
