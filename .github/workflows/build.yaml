@@ -20,8 +20,10 @@ jobs:
       run: |
         npm install --production --unsafe-perm
     - uses: sburris/dependency-check-action@master
+      name: Analyze 3rd party dependencies
       with:
        Project-Name: CrudApp
+    - name: check current directory
       run: |
         pwd
         ls -ltra
